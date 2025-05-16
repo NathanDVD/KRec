@@ -87,7 +87,7 @@ internal static class Native
     public struct INPUT
     {
         public int type;
-        public InputUnion u;
+        public InputUnion union;
     }
 
     [StructLayout(LayoutKind.Explicit)]
@@ -137,15 +137,15 @@ internal static class Native
     {
         Native.INPUT[] inputs = new Native.INPUT[1];
 
-        // Convert virtual key to scan code
+        //Convert virtual key to scan code
         ushort scanCode = (ushort)Native.MapVirtualKey(keyCode, Native.MAPVK_VK_TO_VSC);
 
         inputs[0].type = Native.INPUT_KEYBOARD;
-        inputs[0].u.ki.wVk = 0; // Use scan code instead
-        inputs[0].u.ki.wScan = scanCode;
-        inputs[0].u.ki.dwFlags = (int)Native.KEYEVENTF_SCANCODE | (keyUp ? Native.KEYEVENTF_KEYUP : 0);
-        inputs[0].u.ki.time = 0;
-        inputs[0].u.ki.dwExtraInfo = UIntPtr.Zero;
+        inputs[0].union.ki.wVk = 0;//Use scan code
+        inputs[0].union.ki.wScan = scanCode;
+        inputs[0].union.ki.dwFlags = (int)Native.KEYEVENTF_SCANCODE | (keyUp ? Native.KEYEVENTF_KEYUP : 0);
+        inputs[0].union.ki.time = 0;
+        inputs[0].union.ki.dwExtraInfo = UIntPtr.Zero;
 
         Native.SendInput(1, inputs, Marshal.SizeOf(typeof(Native.INPUT)));
     }
@@ -165,7 +165,7 @@ internal static class Native
         {
             double t = (double)i / steps;
 
-            // Custom easing: ease out (fast start, slow finish), using a sine curve
+            //Ease out
             double ease = t * t * (3 - 2 * t);
 
             double currentX = deltaX * ease;
@@ -188,12 +188,12 @@ internal static class Native
         Native.INPUT[] inputs = new Native.INPUT[1];
 
         inputs[0].type = Native.INPUT_MOUSE;
-        inputs[0].u.mi.dx = x * 65535 / screenWidth;
-        inputs[0].u.mi.dy = y * 65535 / screenHeight;
-        inputs[0].u.mi.mouseData = 0;
-        inputs[0].u.mi.dwFlags = Native.MOUSEEVENTF_MOVE | Native.MOUSEEVENTF_ABSOLUTE;
-        inputs[0].u.mi.time = 0;
-        inputs[0].u.mi.dwExtraInfo = UIntPtr.Zero;
+        inputs[0].union.mi.dx = x * 65535 / screenWidth;
+        inputs[0].union.mi.dy = y * 65535 / screenHeight;
+        inputs[0].union.mi.mouseData = 0;
+        inputs[0].union.mi.dwFlags = Native.MOUSEEVENTF_MOVE | Native.MOUSEEVENTF_ABSOLUTE;
+        inputs[0].union.mi.time = 0;
+        inputs[0].union.mi.dwExtraInfo = UIntPtr.Zero;
 
         Native.SendInput(1, inputs, Marshal.SizeOf(typeof(Native.INPUT)));
     }
@@ -212,12 +212,12 @@ internal static class Native
         Native.INPUT[] inputs = new Native.INPUT[1];
 
         inputs[0].type = Native.INPUT_MOUSE;
-        inputs[0].u.mi.dx = 0;
-        inputs[0].u.mi.dy = 0;
-        inputs[0].u.mi.mouseData = 0;
-        inputs[0].u.mi.dwFlags = flag;
-        inputs[0].u.mi.time = 0;
-        inputs[0].u.mi.dwExtraInfo = UIntPtr.Zero;
+        inputs[0].union.mi.dx = 0;
+        inputs[0].union.mi.dy = 0;
+        inputs[0].union.mi.mouseData = 0;
+        inputs[0].union.mi.dwFlags = flag;
+        inputs[0].union.mi.time = 0;
+        inputs[0].union.mi.dwExtraInfo = UIntPtr.Zero;
 
         Native.SendInput(1, inputs, Marshal.SizeOf(typeof(Native.INPUT)));
     }
