@@ -1,0 +1,2 @@
+C:\Users\ncuen\Desktop\Fun scripts and tools\C#\RecRead\bin\Release\net9.0\win-x64\publish\RecRead.pdb
+C:\Users\ncuen\Desktop\Fun scripts and tools\C#\RecRead\bin\Release\net9.0\win-x64\publish\RecRead.exe

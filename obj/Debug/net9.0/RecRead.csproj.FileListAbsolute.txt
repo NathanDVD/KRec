@@ -1,0 +1,28 @@
+C:\Users\LEGION_17\Desktop\NewFolder\RecRead\bin\Debug\net9.0\RecRead.exe
+C:\Users\LEGION_17\Desktop\NewFolder\RecRead\bin\Debug\net9.0\RecRead.deps.json
+C:\Users\LEGION_17\Desktop\NewFolder\RecRead\bin\Debug\net9.0\RecRead.runtimeconfig.json
+C:\Users\LEGION_17\Desktop\NewFolder\RecRead\bin\Debug\net9.0\RecRead.dll
+C:\Users\LEGION_17\Desktop\NewFolder\RecRead\bin\Debug\net9.0\RecRead.pdb
+C:\Users\LEGION_17\Desktop\NewFolder\RecRead\obj\Debug\net9.0\RecRead.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\LEGION_17\Desktop\NewFolder\RecRead\obj\Debug\net9.0\RecRead.AssemblyInfoInputs.cache
+C:\Users\LEGION_17\Desktop\NewFolder\RecRead\obj\Debug\net9.0\RecRead.AssemblyInfo.cs
+C:\Users\LEGION_17\Desktop\NewFolder\RecRead\obj\Debug\net9.0\RecRead.csproj.CoreCompileInputs.cache
+C:\Users\LEGION_17\Desktop\NewFolder\RecRead\obj\Debug\net9.0\RecRead.dll
+C:\Users\LEGION_17\Desktop\NewFolder\RecRead\obj\Debug\net9.0\refint\RecRead.dll
+C:\Users\LEGION_17\Desktop\NewFolder\RecRead\obj\Debug\net9.0\RecRead.pdb
+C:\Users\LEGION_17\Desktop\NewFolder\RecRead\obj\Debug\net9.0\RecRead.genruntimeconfig.cache
+C:\Users\LEGION_17\Desktop\NewFolder\RecRead\obj\Debug\net9.0\ref\RecRead.dll
+C:\Users\ncuen\Desktop\Fun scripts and tools\C#\RecRead\bin\Debug\net9.0\RecRead.exe
+C:\Users\ncuen\Desktop\Fun scripts and tools\C#\RecRead\bin\Debug\net9.0\RecRead.deps.json
+C:\Users\ncuen\Desktop\Fun scripts and tools\C#\RecRead\bin\Debug\net9.0\RecRead.runtimeconfig.json
+C:\Users\ncuen\Desktop\Fun scripts and tools\C#\RecRead\bin\Debug\net9.0\RecRead.dll
+C:\Users\ncuen\Desktop\Fun scripts and tools\C#\RecRead\bin\Debug\net9.0\RecRead.pdb
+C:\Users\ncuen\Desktop\Fun scripts and tools\C#\RecRead\obj\Debug\net9.0\RecRead.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ncuen\Desktop\Fun scripts and tools\C#\RecRead\obj\Debug\net9.0\RecRead.AssemblyInfoInputs.cache
+C:\Users\ncuen\Desktop\Fun scripts and tools\C#\RecRead\obj\Debug\net9.0\RecRead.AssemblyInfo.cs
+C:\Users\ncuen\Desktop\Fun scripts and tools\C#\RecRead\obj\Debug\net9.0\RecRead.csproj.CoreCompileInputs.cache
+C:\Users\ncuen\Desktop\Fun scripts and tools\C#\RecRead\obj\Debug\net9.0\RecRead.dll
+C:\Users\ncuen\Desktop\Fun scripts and tools\C#\RecRead\obj\Debug\net9.0\refint\RecRead.dll
+C:\Users\ncuen\Desktop\Fun scripts and tools\C#\RecRead\obj\Debug\net9.0\RecRead.pdb
+C:\Users\ncuen\Desktop\Fun scripts and tools\C#\RecRead\obj\Debug\net9.0\RecRead.genruntimeconfig.cache
+C:\Users\ncuen\Desktop\Fun scripts and tools\C#\RecRead\obj\Debug\net9.0\ref\RecRead.dll
