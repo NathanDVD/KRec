@@ -136,9 +136,9 @@ class Program
                 Console.WriteLine("Opening  " + filePath);
             }
 
-            Console.WriteLine("Enter your screen resolution (eg. 1920x1080) : ");
-            string[] parts = Console.ReadLine().Split('x');
-            Vector2 screenResolution = new(float.Parse(parts[0]), float.Parse(parts[1]));
+            // Console.WriteLine("Enter your screen resolution (eg. 1920x1080) : ");
+            // string[] parts = Console.ReadLine().Split('x');
+            // Vector2 screenResolution = new(float.Parse(parts[0]), float.Parse(parts[1]));
             
             List<InputEvent> events = Player.LoadEevent(filePath);
 
@@ -152,11 +152,11 @@ class Program
 
             Native.UnhookWindowsHookEx(playbackHookId);
 
-            Player.ReplayEvents(events, (int)screenResolution.X, (int)screenResolution.Y);
+            Player.ReplayEvents(events, 1920, 1080);
 
             Console.WriteLine("File finished playing :D");
 
-
+            Console.ReadLine();
         }else
         {
             Console.Clear();
@@ -307,7 +307,7 @@ class Program
 
                 if (eventType == "MouseMove")
                 {
-                    const int mouseMoveInterval = 10;//Time in ms
+                    const int mouseMoveInterval = 20;//Time in ms
 
                     if (currentTime - lastMouseMoveTime < mouseMoveInterval)
                         return Native.CallNextHookEx(mouseHookId, nCode, wParam, lParam);
