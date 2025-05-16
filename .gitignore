@@ -1,8 +1,11 @@
 /obj/
 /bin/Debug
-/bin/Release/
+/bin/Release/**
 
-!/bin/Release/net9.0/win-x64/publish/*
+!/bin/Release/net9.0/
+!/bin/Release/net9.0/win-x64/
+!/bin/Release/net9.0/win-x64/publish/
+!/bin/Release/net9.0/win-x64/publish/**
 
 
 .vscode
