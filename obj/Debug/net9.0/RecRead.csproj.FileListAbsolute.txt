@@ -26,3 +26,4 @@ C:\Users\ncuen\Desktop\Fun scripts and tools\C#\RecRead\obj\Debug\net9.0\refint\
 C:\Users\ncuen\Desktop\Fun scripts and tools\C#\RecRead\obj\Debug\net9.0\RecRead.pdb
 C:\Users\ncuen\Desktop\Fun scripts and tools\C#\RecRead\obj\Debug\net9.0\RecRead.genruntimeconfig.cache
 C:\Users\ncuen\Desktop\Fun scripts and tools\C#\RecRead\obj\Debug\net9.0\ref\RecRead.dll
+C:\Users\ncuen\Desktop\Fun scripts and tools\C#\RecRead\obj\Debug\net9.0\RecRead.sourcelink.json
