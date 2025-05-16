@@ -1,0 +1,15 @@
+# Binaries
+/bin/
+/obj/
+*.exe
+*.dll
+*.class
+*.so
+*.o
+*.out
+
+# IDEs and editors
+.vscode/
+
+# Logs
+*.log
