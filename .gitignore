@@ -1,7 +1,12 @@
-/bin/
-
 /obj/
+/bin/Debug
+/bin/Release/**
+
+!/bin/Release/publish/
+!/bin/Release/publish/** */
 
 .vscode
 *.csproj
 *.dll
+*.pdb
+*.json
