@@ -165,7 +165,7 @@ internal static class Native
         {
             double t = (double)i / steps;
 
-            // Custom easing: ease out (fast start, slow finish), using a sine curve
+            //Ease out
             double ease = t * t * (3 - 2 * t);
 
             double currentX = deltaX * ease;
