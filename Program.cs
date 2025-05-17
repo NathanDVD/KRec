@@ -76,15 +76,14 @@ class Program
     private static readonly object _sync = new();
     private static List<InputEvent> _events = new();
 
-    private static long lastMouseMoveTime = 0;
-
-
     private static Stopwatch stopwatch = Stopwatch.StartNew();
 
     #region Variables
     private static bool running = false;
     public static bool playRequested = false;
+    public static bool replay = true;
     private static HashSet<int> pressedKeys = new HashSet<int>();
+    private static long lastMouseMoveTime = 0;
     private static string filePath = "";
     #endregion
 
@@ -126,37 +125,49 @@ class Program
 
         }else if (recOrRead == 2)
         {
-            Console.WriteLine("Name of the file to read? (Don't add the extension) : ");
-            filePath = $"./SavedDataFiles/{Console.ReadLine()}.json";
-            while (!File.Exists(filePath))
+            while (replay)
             {
-                Console.Clear();
-                Console.WriteLine("File name is wrong, or it doesn't exist. Try again : ");
+                replay = false;
+
+                Console.WriteLine("Name of the file to read? (Don't add the extension) : ");
                 filePath = $"./SavedDataFiles/{Console.ReadLine()}.json";
-                Console.WriteLine("Opening  " + filePath);
+                while (!File.Exists(filePath))
+                {
+                    Console.Clear();
+                    Console.WriteLine("File name is wrong, or it doesn't exist. Try again : ");
+                    filePath = $"./SavedDataFiles/{Console.ReadLine()}.json";
+                    Console.WriteLine("Opening  " + filePath);
+                }
+
+                // Console.WriteLine("Enter your screen resolution (eg. 1920x1080) : ");
+                // string[] parts = Console.ReadLine().Split('x');
+                // Vector2 screenResolution = new(float.Parse(parts[0]), float.Parse(parts[1]));
+                
+                List<InputEvent> events = Player.LoadEevent(filePath);
+
+                //Keyboard hook setup
+                IntPtr hInstance = Native.GetModuleHandle(null);
+                IntPtr playbackHookId = Native.SetWindowsHookEx(Native.WH_KEYBOARD_LL, PlaybackKeyboardHookCallback, hInstance, 0);
+
+                Console.WriteLine("Press F1 to start playback...");
+
+                Message.MessageLoop();
+
+                Native.UnhookWindowsHookEx(playbackHookId);
+
+                Player.ReplayEvents(events, 1920, 1080);
+
+                Console.WriteLine("File finished playing :D");
+
+                Console.WriteLine("Replay a file? (y or n) : ");
+                string replayChoice = Console.ReadLine();
+                if ( replayChoice == "y")
+                {
+                    replay = true;
+
+                }else{break;}
             }
 
-            // Console.WriteLine("Enter your screen resolution (eg. 1920x1080) : ");
-            // string[] parts = Console.ReadLine().Split('x');
-            // Vector2 screenResolution = new(float.Parse(parts[0]), float.Parse(parts[1]));
-            
-            List<InputEvent> events = Player.LoadEevent(filePath);
-
-            //Keyboard hook setup
-            IntPtr hInstance = Native.GetModuleHandle(null);
-            IntPtr playbackHookId = Native.SetWindowsHookEx(Native.WH_KEYBOARD_LL, PlaybackKeyboardHookCallback, hInstance, 0);
-
-            Console.WriteLine("Press F1 to start playback...");
-
-            Message.MessageLoop();
-
-            Native.UnhookWindowsHookEx(playbackHookId);
-
-            Player.ReplayEvents(events, 1920, 1080);
-
-            Console.WriteLine("File finished playing :D");
-
-            Console.ReadLine();
         }else
         {
             Console.Clear();
