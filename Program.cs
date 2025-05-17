@@ -82,6 +82,7 @@ class Program
     private static bool running = false;
     public static bool playRequested = false;
     public static bool replay = true;
+    public static bool userChoosed = false;
     private static HashSet<int> pressedKeys = new HashSet<int>();
     private static long lastMouseMoveTime = 0;
     private static string filePath = "";
@@ -94,87 +95,100 @@ class Program
         
         Directory.CreateDirectory("./SavedDataFiles");//Create the folder to hold the data files
 
-        Console.WriteLine("Choose 1 or 2 : Record or Read?");
-        int recOrRead = int.Parse(Console.ReadLine());
-
-        //_________________________________________
-        //-----------------Record------------------
-        //_________________________________________
-        if (recOrRead == 1)
+        while (!userChoosed)
         {
-            Console.WriteLine("Choose a file name : ");
-            filePath = $"./SavedDataFiles/{Console.ReadLine()}.json";
+            userChoosed = true;
+
             Console.Clear();
 
-            //Keyboard hook
-            var moduleHandle = Native.GetModuleHandle(null);
-            hookId = Native.SetWindowsHookEx(Native.WH_KEYBOARD_LL, hookProc, moduleHandle, 0);
+            Console.WriteLine("Choose 1 or 2 : Record or Read?");
+            int recOrRead = int.Parse(Console.ReadLine());
 
-            //Mouse hook
-            mouseHookId = Native.SetWindowsHookEx(Native.WH_MOUSE_LL, mouseProc, moduleHandle, 0);
-
-
-            Console.WriteLine("\nPress F1 to start recording, F2 to stop, and F3 to exit.\n");
-            Console.Write("|CLOSING WITH ANYTHING ELSE THAN F3 MAY RESULT IN NOT SAVING EVERYTHING| \n(Use F2 before closing with the button / alt+f4)\n");
-            Message.MessageLoop();
-        
-
-        //_________________________________________
-        //------------------Read-------------------
-        //_________________________________________
-
-        }else if (recOrRead == 2)
-        {
-            while (replay)
+            //_________________________________________
+            //-----------------Record------------------
+            //_________________________________________
+            if (recOrRead == 1)
             {
-                replay = false;
-
-                Console.WriteLine("Name of the file to read? (Don't add the extension) : ");
+                Console.WriteLine("Choose a file name : ");
                 filePath = $"./SavedDataFiles/{Console.ReadLine()}.json";
-                while (!File.Exists(filePath))
+                Console.Clear();
+
+                //Keyboard hook
+                var moduleHandle = Native.GetModuleHandle(null);
+                hookId = Native.SetWindowsHookEx(Native.WH_KEYBOARD_LL, hookProc, moduleHandle, 0);
+
+                //Mouse hook
+                mouseHookId = Native.SetWindowsHookEx(Native.WH_MOUSE_LL, mouseProc, moduleHandle, 0);
+
+
+                Console.WriteLine("\nPress F1 to start recording, F2 to stop, and F3 to exit.\n");
+                Console.Write("|CLOSING WITH ANYTHING ELSE THAN F3 MAY RESULT IN NOT SAVING EVERYTHING| \n(Use F2 before closing with the button / alt+f4)\n");
+                Message.MessageLoop();
+            
+
+            //_________________________________________
+            //------------------Read-------------------
+            //_________________________________________
+
+            }else if (recOrRead == 2)
+            {
+                while (replay)
                 {
+                    replay = false;
                     Console.Clear();
-                    Console.WriteLine("File name is wrong, or it doesn't exist. Try again : ");
+
+                    //Ask for the file name
+                    Console.WriteLine("Name of the file to read? (Don't add the extension) : ");
                     filePath = $"./SavedDataFiles/{Console.ReadLine()}.json";
-                    Console.WriteLine("Opening  " + filePath);
+                    while (!File.Exists(filePath))
+                    {
+                        Console.Clear();
+                        Console.WriteLine("File name is wrong, or it doesn't exist. Try again : ");
+                        filePath = $"./SavedDataFiles/{Console.ReadLine()}.json";
+                        Console.WriteLine("Opening  " + filePath);
+                    }
+
+                    // Console.WriteLine("Enter your screen resolution (eg. 1920x1080) : ");
+                    // string[] parts = Console.ReadLine().Split('x');
+                    // Vector2 screenResolution = new(float.Parse(parts[0]), float.Parse(parts[1]));
+                    
+                    List<InputEvent> events = Player.LoadEevent(filePath);
+
+                    //Keyboard hook setup
+                    IntPtr hInstance = Native.GetModuleHandle(null);
+                    IntPtr playbackHookId = Native.SetWindowsHookEx(Native.WH_KEYBOARD_LL, PlaybackKeyboardHookCallback, hInstance, 0);
+
+                    Console.WriteLine("Press F1 to start playback...");
+
+                    Message.MessageLoop();//Keep the app running and intercept messages
+
+                    Native.UnhookWindowsHookEx(playbackHookId);//Unhook
+
+                    Player.ReplayEvents(events, 1920, 1080);//Replay
+
+                    Console.WriteLine("File finished playing :D");
+
+                    Console.WriteLine("Replay a file? (y or n) : ");
+                    string replayChoice = Console.ReadLine();
+                    if ( replayChoice == "y")
+                    {
+                        replay = true;
+
+                    }else{break;}
                 }
 
-                // Console.WriteLine("Enter your screen resolution (eg. 1920x1080) : ");
-                // string[] parts = Console.ReadLine().Split('x');
-                // Vector2 screenResolution = new(float.Parse(parts[0]), float.Parse(parts[1]));
-                
-                List<InputEvent> events = Player.LoadEevent(filePath);
+            }else
+            {
+                Console.Clear();
+                Console.WriteLine("Wrong input....");
+                Console.WriteLine("Now you have to restart. Happy?");
 
-                //Keyboard hook setup
-                IntPtr hInstance = Native.GetModuleHandle(null);
-                IntPtr playbackHookId = Native.SetWindowsHookEx(Native.WH_KEYBOARD_LL, PlaybackKeyboardHookCallback, hInstance, 0);
+                Thread.Sleep(3000);
 
-                Console.WriteLine("Press F1 to start playback...");
-
-                Message.MessageLoop();
-
-                Native.UnhookWindowsHookEx(playbackHookId);
-
-                Player.ReplayEvents(events, 1920, 1080);
-
-                Console.WriteLine("File finished playing :D");
-
-                Console.WriteLine("Replay a file? (y or n) : ");
-                string replayChoice = Console.ReadLine();
-                if ( replayChoice == "y")
-                {
-                    replay = true;
-
-                }else{break;}
+                userChoosed = false;
             }
-
-        }else
-        {
-            Console.Clear();
-            Console.WriteLine("Wrong input....");
-            Console.WriteLine("Now you have to restart. Happy?");
-            Console.ReadLine();
         }
+        
     }
 
 
