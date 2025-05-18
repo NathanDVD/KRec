@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RecRead")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bce5482b1f04175e7140529fe718d6dc673f5006")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+13bc8f55b953025100d44ebfded715adb3c275b5")]
 [assembly: System.Reflection.AssemblyProductAttribute("RecRead")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RecRead")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

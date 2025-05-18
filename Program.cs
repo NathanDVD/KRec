@@ -125,7 +125,9 @@ class Program
                     }
                     
                     //Screen res is needed for the mouse movements to work properly
-                    Console.WriteLine("Enter your screen resolution (eg. 1920x1080) : ");
+                    int screenWidth = Native.GetSystemMetrics(Native.SM_CXSCREEN);
+                    int screenHeight = Native.GetSystemMetrics(Native.SM_CYSCREEN);
+
                     string[] parts = Console.ReadLine().Split('x');
                     Vector2 screenResolution = new(float.Parse(parts[0]), float.Parse(parts[1]));
                     
