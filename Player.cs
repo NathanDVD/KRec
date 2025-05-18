@@ -23,10 +23,12 @@ public class Player
             switch (ev.EventType)
             {
                 case "KeyDown":
-                    Native.SendKey(ushort.Parse(ev.Data), false);
+                    if (ushort.TryParse(ev.Data, out ushort keyDown))
+                        Native.SendKey(keyDown, false);
                     break;
                 case "KeyUp":
-                    Native.SendKey(ushort.Parse(ev.Data), true);
+                    if (ushort.TryParse(ev.Data, out ushort keyUp))
+                        Native.SendKey(keyUp, true);
                     break;
                 case "MouseMove":
                 case "LDown":
@@ -51,11 +53,11 @@ public class Player
     }
 
     //Helper function for coordinate parsing
-    private static bool TryParseCoordinates(string data, out int x, out int y)
+    private static bool TryParseCoordinates(string? data, out int x, out int y)
     {
         x = y = 0;
-        var parts = data.Split(',');
-        return parts.Length == 2 &&
+        string[]? parts = data?.Split(',');
+        return parts?.Length == 2 &&
             int.TryParse(parts[0], out x) &&
             int.TryParse(parts[1], out y);
     }

@@ -78,7 +78,7 @@ class Program
             Console.Clear();
 
             Console.WriteLine("Choose 1 or 2 : Record or Read?");
-            int recOrRead = int.Parse(Console.ReadLine());
+            int recOrRead = int.TryParse(Console.ReadLine(), out var result) ? result : 1;//If nothing return 1
 
             //_________________________________________
             //-----------------Record------------------
@@ -144,7 +144,8 @@ class Program
                     Console.WriteLine("File finished playing :D");
 
                     Console.WriteLine("Replay a file? (y or n) : ");
-                    string replayChoice = Console.ReadLine();
+                    string? replayChoice = Console.ReadLine();
+
                     if ( replayChoice == "y")
                     {
                         replay = true;
@@ -178,7 +179,6 @@ class Program
             args = "-NoProfile -Command \"Add-Type -AssemblyName System.Windows.Forms; $f = New-Object Windows.Forms.SaveFileDialog; $f.Filter = 'JSON files (*.json)|*.json|All files (*.*)|*.*'; $f.DefaultExt = 'json'; $f.Title = 'Save your file as'; $f.ShowDialog() | Out-Null; Write-Output $f.FileName\"";
         }
 
-        string script = "Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.OpenFileDialog]::new().ShowDialog()";
         var psi = new ProcessStartInfo
         {
             FileName = "powershell",
@@ -186,8 +186,8 @@ class Program
             RedirectStandardOutput = true,
             UseShellExecute = false
         };
-        using var process = Process.Start(psi);
-        string result = process.StandardOutput.ReadToEnd().Trim();
+        Process? process = Process.Start(psi);
+        string? result = process?.StandardOutput.ReadToEnd().Trim();
         if (string.IsNullOrEmpty(result)) throw new Exception("No file choosed.");
 
         return result;
