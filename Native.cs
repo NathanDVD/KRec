@@ -3,6 +3,14 @@ using System.Runtime.InteropServices;
 
 internal static class Native
 {
+    #region Screen infos
+    [DllImport("user32.dll")]
+    public static extern int GetSystemMetrics(int nIndex);
+
+    public const int SM_CXSCREEN = 0;
+    public const int SM_CYSCREEN = 1;
+    #endregion
+
     #region Input record related
     public delegate IntPtr HookProc(int nCode, IntPtr wParam, IntPtr lParam);
 
