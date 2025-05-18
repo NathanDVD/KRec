@@ -33,7 +33,9 @@ class Hooks
     private static long lastMouseMoveTime = 0;
     #endregion
 
-    //Process keyboard inputs
+    ///<summary>
+    /// Process keyboard inputs for the recording hotkeys
+    ///</summary>
     public static IntPtr KeyboardHookCallback(int nCode, IntPtr wParam, IntPtr lParam)
     {
         if (nCode < 0) 
@@ -126,7 +128,9 @@ class Hooks
     }
 
 
-    //Global keyboard hook
+    ///<summary>
+    /// Keyboard hook handling for playback
+    ///</summary>
     public static IntPtr PlaybackKeyboardHookCallback(int nCode, IntPtr wParam, IntPtr lParam)
     {
         if (nCode >= 0)
@@ -149,7 +153,9 @@ class Hooks
     }
 
 
-    //Process mouse inputs
+    ///<summary>
+    /// Process mouse inputs for recording
+    ///</summary>
     public static IntPtr MouseHookCallback(int nCode, IntPtr wParam, IntPtr lParam)
     {
         if (nCode >= 0 && running)
