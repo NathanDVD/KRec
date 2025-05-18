@@ -127,9 +127,6 @@ class Program
                     //Screen res is needed for the mouse movements to work properly
                     int screenWidth = Native.GetSystemMetrics(Native.SM_CXSCREEN);
                     int screenHeight = Native.GetSystemMetrics(Native.SM_CYSCREEN);
-
-                    string[] parts = Console.ReadLine().Split('x');
-                    Vector2 screenResolution = new(float.Parse(parts[0]), float.Parse(parts[1]));
                     
                     List<InputEvent> events = Player.LoadEevent(filePath);
 
@@ -143,7 +140,7 @@ class Program
 
                     Native.UnhookWindowsHookEx(playbackHookId);//Unhook
 
-                    Player.ReplayEvents(events, (int)screenResolution.X, (int)screenResolution.Y);//Replay
+                    Player.ReplayEvents(events, screenWidth, screenHeight);//Replay
 
                     Console.WriteLine("File finished playing :D");
 
