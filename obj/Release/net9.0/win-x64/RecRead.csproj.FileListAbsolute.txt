@@ -197,3 +197,4 @@ C:\Users\ncuen\Desktop\Fun scripts and tools\C#\RecRead\obj\Release\net9.0\win-x
 C:\Users\ncuen\Desktop\Fun scripts and tools\C#\RecRead\obj\Release\net9.0\win-x64\RecRead.pdb
 C:\Users\ncuen\Desktop\Fun scripts and tools\C#\RecRead\obj\Release\net9.0\win-x64\RecRead.genruntimeconfig.cache
 C:\Users\ncuen\Desktop\Fun scripts and tools\C#\RecRead\obj\Release\net9.0\win-x64\ref\RecRead.dll
+C:\Users\ncuen\Desktop\Fun scripts and tools\C#\RecRead\obj\Release\net9.0\win-x64\RecRead.sourcelink.json
