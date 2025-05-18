@@ -114,14 +114,14 @@ class Program
                     Console.Clear();
 
                     //Ask for the file name
-                    Console.WriteLine("Name of the file to read? (Don't add the extension) : ");
-                    filePath = $"./SavedDataFiles/{Console.ReadLine()}.json";
+                    filePath = ShowFileDialog();
+
                     while (!File.Exists(filePath))
                     {
                         Console.Clear();
-                        Console.WriteLine("File name is wrong, or it doesn't exist. Try again : ");
-                        filePath = $"./SavedDataFiles/{Console.ReadLine()}.json";
-                        Console.WriteLine("Opening  " + filePath);
+                        Console.WriteLine("File name is wrong, or it doesn't exist. Try again.");
+
+                        filePath = ShowFileDialog();
                     }
                     
                     //Screen res is needed for the mouse movements to work properly
@@ -167,7 +167,24 @@ class Program
         }
         
     }
+    
+    ///<summary>
+    /// Helper function that prompts the file dialog to choose files
+    /// Uses powershell commands to use some WinForm methods
+    ///</summary>
+    public static string ShowFileDialog()
+    {
+        string script = "Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.OpenFileDialog]::new().ShowDialog()";
+        var psi = new ProcessStartInfo
+        {
+            FileName = "powershell",
+            Arguments = "-NoProfile -Command \"Add-Type -AssemblyName System.Windows.Forms; $f = New-Object Windows.Forms.OpenFileDialog; $f.Filter = 'JSON files (*.json)|*.json'; $f.ShowDialog() | Out-Null; Write-Output $f.FileName\"",
+            RedirectStandardOutput = true,
+            UseShellExecute = false
+        };
+        using var process = Process.Start(psi);
+        string result = process.StandardOutput.ReadToEnd().Trim();
 
-
-
+        return result;
+    }
 }
