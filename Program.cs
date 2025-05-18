@@ -147,10 +147,11 @@ class Program
                         filePath = $"./SavedDataFiles/{Console.ReadLine()}.json";
                         Console.WriteLine("Opening  " + filePath);
                     }
-
-                    // Console.WriteLine("Enter your screen resolution (eg. 1920x1080) : ");
-                    // string[] parts = Console.ReadLine().Split('x');
-                    // Vector2 screenResolution = new(float.Parse(parts[0]), float.Parse(parts[1]));
+                    
+                    //Screen res is needed for the mouse movements to work properly
+                    Console.WriteLine("Enter your screen resolution (eg. 1920x1080) : ");
+                    string[] parts = Console.ReadLine().Split('x');
+                    Vector2 screenResolution = new(float.Parse(parts[0]), float.Parse(parts[1]));
                     
                     List<InputEvent> events = Player.LoadEevent(filePath);
 
@@ -164,7 +165,7 @@ class Program
 
                     Native.UnhookWindowsHookEx(playbackHookId);//Unhook
 
-                    Player.ReplayEvents(events, 1920, 1080);//Replay
+                    Player.ReplayEvents(events, (int)screenResolution.X, (int)screenResolution.Y);//Replay
 
                     Console.WriteLine("File finished playing :D");
 
