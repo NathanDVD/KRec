@@ -85,9 +85,7 @@ class Program
             //_________________________________________
             if (recOrRead == 1)
             {
-                Console.WriteLine("Choose a file name : ");
-                filePath = $"./SavedDataFiles/{Console.ReadLine()}.json";
-                Console.Clear();
+                filePath = ShowFileDialog(false);
 
                 //Keyboard hook
                 var moduleHandle = Native.GetModuleHandle(null);
@@ -112,16 +110,17 @@ class Program
                 {
                     replay = false;
                     Console.Clear();
+                    Console.WriteLine("Make a file (remember you need a .json)");
 
                     //Ask for the file name
-                    filePath = ShowFileDialog();
+                    filePath = ShowFileDialog(true);
 
                     while (!File.Exists(filePath))
                     {
                         Console.Clear();
                         Console.WriteLine("File name is wrong, or it doesn't exist. Try again.");
 
-                        filePath = ShowFileDialog();
+                        filePath = ShowFileDialog(true);
                     }
                     
                     //Screen res is needed for the mouse movements to work properly
@@ -171,18 +170,25 @@ class Program
     /// Helper function that prompts the file dialog to choose files
     /// Uses powershell commands to use some WinForm methods
     ///</summary>
-    public static string ShowFileDialog()
+    public static string ShowFileDialog(bool isChoosingFile)
     {
+        string args = "-NoProfile -Command \"Add-Type -AssemblyName System.Windows.Forms; $f = New-Object Windows.Forms.OpenFileDialog; $f.Filter = 'JSON files (*.json)|*.json'; $f.ShowDialog() | Out-Null; Write-Output $f.FileName\"";
+        if (!isChoosingFile)
+        {
+            args = "-NoProfile -Command \"Add-Type -AssemblyName System.Windows.Forms; $f = New-Object Windows.Forms.SaveFileDialog; $f.Filter = 'JSON files (*.json)|*.json|All files (*.*)|*.*'; $f.DefaultExt = 'json'; $f.Title = 'Save your file as'; $f.ShowDialog() | Out-Null; Write-Output $f.FileName\"";
+        }
+
         string script = "Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.OpenFileDialog]::new().ShowDialog()";
         var psi = new ProcessStartInfo
         {
             FileName = "powershell",
-            Arguments = "-NoProfile -Command \"Add-Type -AssemblyName System.Windows.Forms; $f = New-Object Windows.Forms.OpenFileDialog; $f.Filter = 'JSON files (*.json)|*.json'; $f.ShowDialog() | Out-Null; Write-Output $f.FileName\"",
+            Arguments = args,
             RedirectStandardOutput = true,
             UseShellExecute = false
         };
         using var process = Process.Start(psi);
         string result = process.StandardOutput.ReadToEnd().Trim();
+        if (string.IsNullOrEmpty(result)) throw new Exception("No file choosed.");
 
         return result;
     }
