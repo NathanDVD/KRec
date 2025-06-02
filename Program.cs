@@ -85,6 +85,9 @@ class Program
             //_________________________________________
             if (recOrRead == 1)
             {
+                Console.Clear();
+                Console.WriteLine("Create a file.");
+
                 filePath = ShowFileDialog(false);
 
                 //Keyboard hook
@@ -110,7 +113,7 @@ class Program
                 {
                     replay = false;
                     Console.Clear();
-                    Console.WriteLine("Make a file (remember you need a .json)");
+                    Console.WriteLine("Choose a file (remember you need a .json)");
 
                     //Ask for the file name
                     filePath = ShowFileDialog(true);

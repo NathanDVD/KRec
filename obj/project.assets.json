@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ncuen\\Desktop\\Fun scripts and tools\\C#\\RecRead\\RecRead.csproj",
+      "projectUniqueName": "C:\\Users\\ncuen\\Desktop\\ScriptsAndTools\\C#\\RecRead\\RecRead.csproj",
       "projectName": "RecRead",
-      "projectPath": "C:\\Users\\ncuen\\Desktop\\Fun scripts and tools\\C#\\RecRead\\RecRead.csproj",
+      "projectPath": "C:\\Users\\ncuen\\Desktop\\ScriptsAndTools\\C#\\RecRead\\RecRead.csproj",
       "packagesPath": "C:\\Users\\ncuen\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ncuen\\Desktop\\Fun scripts and tools\\C#\\RecRead\\obj\\",
+      "outputPath": "C:\\Users\\ncuen\\Desktop\\ScriptsAndTools\\C#\\RecRead\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ncuen\\AppData\\Roaming\\NuGet\\NuGet.Config"
